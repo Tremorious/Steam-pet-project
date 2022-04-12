@@ -1,0 +1,12 @@
+.library {
+    &__title {
+        margin-bottom: 30px;
+    }
+    &__games-container {
+        margin: 0 auto;
+        width: 80%;
+        display: grid;
+        grid-template-columns: 1fr 1fr 1fr;
+        grid-gap: 20px;
+    }
+}

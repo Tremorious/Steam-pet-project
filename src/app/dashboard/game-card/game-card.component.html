@@ -1,0 +1,49 @@
+<div class="game-card">
+    <div class="game-card__title">
+        <img class="game-card__title__background-image" [src]="gameDetails.image" alt="#" />
+        <span class="game-card__title__name"
+            >{{ gameDetails.name }}
+            <br />
+            <span class="game-card__title__tag">{{ gameDetails.tag }}</span>
+        </span>
+        <span class="game-card__title__price">{{ gameDetails.price }} UAH</span>
+    </div>
+
+    <div class="game-card__description">
+        {{ gameDetails.description | slice: 0:restriction }}
+        <br />
+        <button
+            *ngIf="gameDetails.description.length > restriction"
+            type="button"
+            class="game-card__description__readmore-button"
+            (click)="onReadMore()"
+        >
+            {{ readMoreButtonText }}
+        </button>
+    </div>
+
+    <button
+        *ngIf="componentPurpose === 'Games Component'"
+        mat-raised-button
+        color="primary"
+        type="button"
+        class="game-card__add-button"
+        (click)="onAddToLibrary(gameDetails._id)"
+    >
+        Add to Library
+    </button>
+    <div class="game-card__buttons-block" *ngIf="componentPurpose === 'Library Component'">
+        <button
+            mat-raised-button
+            color="warn"
+            type="button"
+            class="game-card__buttons-block__download-button"
+            (click)="onRemoveFromLibrary(gameDetails._id)"
+        >
+            Remove
+        </button>
+        <button mat-raised-button color="primary" type="button" class="game-card__buttons-block__share-button">
+            Share
+        </button>
+    </div>
+</div>

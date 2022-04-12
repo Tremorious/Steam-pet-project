@@ -1,0 +1,32 @@
+<div class="registeration">
+    <form class="registeration-form" [formGroup]="registerationUserForm" (submit)="registeration()">
+        <mat-card class="registeration-form__inner">
+            <mat-card-title class="registeration-form__title"> Registration </mat-card-title>
+            <mat-card-subtitle></mat-card-subtitle>
+
+            <mat-card-content>
+                <p>
+                    <mat-form-field class="registeration-form__input" appearance="fill">
+                        <mat-label>Username</mat-label>
+                        <input matInput placeholder="Type in you data" formControlName="username" />
+                    </mat-form-field>
+                </p>
+                <p>
+                    <mat-form-field class="registeration-form__input" appearance="fill">
+                        <mat-label>Password</mat-label>
+                        <input matInput placeholder="Type in you data" formControlName="password" />
+                        <mat-error>wrong data</mat-error>
+                    </mat-form-field>
+                </p>
+                <p>
+                    <button class="registeration-form__button" mat-raised-button color="primary">Sign up</button>
+                </p>
+
+                <a [routerLink]="['/auth/login']"
+                    >Allready have an acount? <br />
+                    Sign in!</a
+                >
+            </mat-card-content>
+        </mat-card>
+    </form>
+</div>

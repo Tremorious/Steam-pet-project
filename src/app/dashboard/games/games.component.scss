@@ -1,0 +1,61 @@
+@use 'src/variables' as *;
+
+.games-block {
+    &__main-content {
+        display: grid;
+        grid-template-columns: 3fr 1fr;
+        grid-template-rows: 1fr;
+        min-height: 80vh;
+    }
+    &__card {
+        &-list {
+            display: grid;
+            grid-gap: 15px;
+            grid-template-columns: 1fr 1fr 1fr;
+            grid-template-rows: repeat(auto-fit, minmax(1fr, 1fr));
+            position: relative;
+            &::after {
+                content: '';
+                border-left: 2px solid #000;
+                height: 100%;
+                position: absolute;
+                top: 0;
+                right: -30px;
+            }
+        }
+
+        &-filters {
+            position: sticky;
+            top: 0;
+            height: fit-content;
+            margin-left: 40px;
+
+            // &__title {
+            //     margin: 0;
+            // }
+
+            &__range-filter {
+                display: flex;
+                margin-left: 20px;
+                color: blue;
+                &__slider {
+                    width: 100%;
+                }
+                &__price-block {
+                    margin-left: 20px;
+                    display: flex;
+                    justify-content: space-between;
+                    margin-bottom: 10px;
+                }
+            }
+            &__reset-button {
+                margin: 10px 0px;
+            }
+            &__checkbox-filers {
+                p {
+                    margin-left: 20px;
+                }
+            }
+        }
+    }
+}

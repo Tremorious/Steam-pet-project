@@ -1,0 +1,65 @@
+<div class="container-large">
+    <div class="games-block">
+        <h1>Featured Games</h1>
+
+        <div class="games-block__main-content">
+            <div class="games-block__card-list">
+                <ng-container
+                    *ngFor="
+                        let game of gamesList
+                            | rangeFilter
+                                : queryValue.priceQuery
+                                : queryValue.tagQuery.action
+                                : queryValue.tagQuery.adventure
+                                : queryValue.tagQuery.indie
+                    "
+                >
+                    <app-game-card [componentPurpose]="'Games Component'" [gameDetails]="game"></app-game-card>
+                </ng-container>
+            </div>
+
+            <div class="games-block__card-filters">
+                <h4 class="games-block__card-filters__title">Filter by price</h4>
+                <div class="games-block__card-filters__range-filter">
+                    <span>{{ minPrice }}</span>
+                    <mat-slider
+                        class="games-block__card-filters__range-filter__slider"
+                        thumbLabel
+                        [min]="minPrice"
+                        [max]="maxPrice"
+                        [value]="maxPrice"
+                        step="10"
+                        [(ngModel)]="queryValue.priceQuery"
+                    ></mat-slider>
+                    <span>{{ maxPrice }}</span>
+                    <div class="games-block__card-filters__range-filter__price-block"></div>
+                </div>
+
+                <div class="games-block__card-filters__checkbox-filers">
+                    <h4>Select your toppings:</h4>
+                    <p>
+                        <mat-checkbox color="primary" [(ngModel)]="queryValue.tagQuery.action">action </mat-checkbox>
+                    </p>
+                    <p>
+                        <mat-checkbox color="primary" [(ngModel)]="queryValue.tagQuery.adventure"
+                            >adventure</mat-checkbox
+                        >
+                    </p>
+                    <p>
+                        <mat-checkbox color="primary" [(ngModel)]="queryValue.tagQuery.indie">indie</mat-checkbox>
+                    </p>
+                    <button
+                        mat-flat-button
+                        color="warn"
+                        class="games-block__card-filters__reset-button"
+                        (click)="resetQueryValues()"
+                    >
+                        Reset
+                    </button>
+
+                    <p>{{ queryValue | json }}</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
