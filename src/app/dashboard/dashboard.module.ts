@@ -18,6 +18,7 @@ import { HTTP_INTERCEPTORS } from '@angular/common/http';
 import { UserService } from '../services/user.service';
 import { GameCardComponent } from './game-card/game-card.component';
 import { RangeFilterPipe } from './games/range-filter.pipe';
+import { GameSliderComponent } from './game-slider/game-slider.component';
 
 @NgModule({
     declarations: [
@@ -29,7 +30,8 @@ import { RangeFilterPipe } from './games/range-filter.pipe';
         GamesComponent,
         SearchbarComponent,
         GameCardComponent,
-        RangeFilterPipe
+        RangeFilterPipe,
+        GameSliderComponent
     ],
     imports: [CommonModule, MaterialModule, RouterModule, DashboardRoutingModule, ReactiveFormsModule, FormsModule],
     providers: [

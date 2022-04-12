@@ -1,15 +1,15 @@
 @use 'src/variables' as *;
 
 .header {
-    height: 70px;
-    background-color: #e8e8e8;
+    height: 60px;
+    background-color: rgba(42, 42, 42, 255);
+    color: rgb(245, 245, 245);
 
     font-size: 1.5em;
     font-weight: 400;
     box-shadow: 0 2px 2px -2px gray;
     display: flex;
     box-sizing: border-box;
-    padding: 0 16px;
     width: 100%;
     flex-direction: row;
     justify-content: space-between;
@@ -24,26 +24,30 @@
 
     &__logo {
         height: 40px;
-        width: 40px;
+        width: 150px;
     }
     &__nav {
         display: flex;
 
-        width: 400px;
+        width: 600px;
         justify-content: space-around;
     }
     &__link {
         align-self: center;
         &:hover {
-            color: $hover-color;
+            color: $main-blue;
             transition: color 0.3s;
         }
         &-active {
-            color: $hover-color;
+            color: $main-blue;
         }
     }
     &__logout-button {
         justify-content: flex-end;
         display: block;
+        height: 100%;
+        border-radius: 0;
+        font-size: 14px;
+        background-color: $main-blue;
     }
 }

@@ -5,11 +5,12 @@
             <app-game-card
                 [componentPurpose]="'Library Component'"
                 [gameDetails]="game"
+                (deletedGame)="onRemoveFromLibrary($event)"
                 *ngFor="let game of displayedGames"
             ></app-game-card>
         </div>
-        <span class="library__games" *ngIf="displayedGames.length === 0"
-            >You have no games in your library</span
-        >
+        <span class="library__games" *ngIf="displayedGames.length === 0">You have no games in your library</span>
     </div>
 </div>
+
+

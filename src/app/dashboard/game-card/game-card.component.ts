@@ -1,6 +1,7 @@
+import { fromEvent, interval, Observable, of } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { GamesService } from 'src/app/services/games.service';
-import { Component, Input, OnInit } from '@angular/core';
+import { Component, Input, OnInit, Output, EventEmitter } from '@angular/core';
 
 @Component({
     selector: 'app-game-card',
@@ -10,6 +11,8 @@ import { Component, Input, OnInit } from '@angular/core';
 export class GameCardComponent implements OnInit {
     @Input() gameDetails: any;
     @Input() componentPurpose: string = '';
+    @Output() deletedGame = new EventEmitter<number>();
+
     public showReadMoreButton = false;
     public textLimitsList = {
         wrappedText: 400,
@@ -52,6 +55,7 @@ export class GameCardComponent implements OnInit {
     }
 
     public onRemoveFromLibrary(id: number) {
+        this.deletedGame.emit(id);
         this.gamesService.removeGame(id).subscribe(
             (data) => this._snackBar.open('removed'),
             (err) => {
@@ -60,3 +64,5 @@ export class GameCardComponent implements OnInit {
         );
     }
 }
+
+
