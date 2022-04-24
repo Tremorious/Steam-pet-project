@@ -1,0 +1,37 @@
+<div *ngIf="gamesList.length > 0" class="game-slider__container">
+    <div *ngFor="let slide of gamesList; let i = index" class="game-slider">
+        <div [ngClass]="{ active: selectedIndex === i }" class="game-slider__inner-slide">
+            <img *ngIf="selectedIndex === i" @expandedPanel [src]="slide.image" alt="#" />
+
+            <div class="game-slider__content-column">
+                <img [src]="slide.image_logo" alt="#" />
+                <span class="game-slider__action-tag"> Доступно для предпокупки </span>
+                <p class="game-slider__description">{{ slide.description | slice: 0:100 }}...</p>
+                <span class="game-slider__price">От {{ slide.price }},00&#8372; </span>
+                <div class="game-slider__buttons-block">
+                    <button class="game-slider__button">Добавить в библиотеку</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="game-slider__dot-container">
+        <span
+            (click)="selectImage(i)"
+            *ngFor="let dot of gamesList; let i = index"
+            [ngClass]="{ 'slide-active': selectedIndex === i }"
+            class="dot"
+        ></span>
+    </div>
+
+    <div class="game-sidebar">
+        <div
+            (click)="selectImage(i)"
+            *ngFor="let game of gamesList | slice: 0:5; let i = index"
+            [ngClass]="{ 'side-active': selectedIndex === i }"
+            class="game-sidebar__card"
+        >
+            <img [src]="game.image_small" alt="" class="game-sidebar__card-image" />
+            <div class="game-sidebar__card-name">{{ game.name | slice: 0:20 }}</div>
+        </div>
+    </div>
+</div>

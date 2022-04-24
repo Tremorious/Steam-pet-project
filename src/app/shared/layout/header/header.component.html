@@ -1,0 +1,18 @@
+<header class="header">
+    <nav class="header__nav">
+        <a routerLink="dashboard"
+            ><img
+                class="header__logo"
+                src="https://store.akamai.steamstatic.com/public/shared/images/header/logo_steam.svg?t=962016"
+                alt=""
+        /></a>
+        <a routerLink="dashboard/games" routerLinkActive="header__link-active" class="header__link">Games</a>
+        <a routerLink="dashboard/library" routerLinkActive="header__link-active" class="header__link">Library</a>
+        <a routerLink="dashboard/friends" routerLinkActive="header__link-active" class="header__link">Friends</a>
+        <a routerLink="dashboard/profile" routerLinkActive="header__link-active" class="header__link">Profile</a>
+    </nav>
+
+    <button class="header__logout-button" (click)="onLogout()" mat-raised-button color="primary" type="button">
+        Logout
+    </button>
+</header>

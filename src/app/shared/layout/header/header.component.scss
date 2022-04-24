@@ -1,0 +1,79 @@
+@use 'src/variables' as *;
+
+.header {
+    height: 50px;
+    background-color: $gray-bg;
+    color: rgb(245, 245, 245);
+    text-transform: uppercase;
+    font-size: 0.8em;
+    font-weight: 400;
+    letter-spacing: 1.3px;
+    box-shadow: 0 2px 2px -2px gray;
+    display: flex;
+    box-sizing: border-box;
+    width: 100%;
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: center;
+    white-space: nowrap;
+
+    a {
+        cursor: pointer;
+        display: flex;
+        height: inherit;
+    }
+
+    &__logo {
+        height: 40px;
+        width: 150px;
+    }
+    &__nav {
+        display: flex;
+
+        width: 600px;
+        justify-content: space-around;
+    }
+    &__link {
+        align-self: center;
+        position: relative;
+        &:hover {
+            color: $main-blue;
+            transition: color 0.3s;
+            color: $main-blue;
+            &::before {
+                height: 5px;
+                opacity: 1;
+                transition: height 0.3s ease 0s, opacity 0.15s ease-out 0s;
+            }
+        }
+        &::before {
+            background: rgb(0, 120, 242);
+            content: '';
+            display: block;
+            position: absolute;
+            bottom: -18px;
+            left: 0px;
+            width: 100%;
+            height: 0px;
+
+            opacity: 0;
+            transition: height 0.3s ease-out 0s, opacity 0.1s ease-out 0.15s;
+        }
+        &-active {
+            color: $main-blue;
+            &::before {
+                height: 5px;
+                opacity: 1;
+                transition: height 0.3s ease 0s, opacity 0.15s ease-out 0s;
+            }
+        }
+    }
+    &__logout-button {
+        justify-content: flex-end;
+        display: block;
+        height: 100%;
+        border-radius: 0;
+        font-size: 14px;
+        background-color: $main-blue;
+    }
+}

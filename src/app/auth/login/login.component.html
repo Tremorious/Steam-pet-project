@@ -1,0 +1,31 @@
+<div class="login">
+    <form class="login-form" [formGroup]="loginUserForm" (submit)="login()">
+        <mat-card class="login-form__inner">
+            <mat-card-title class="login-form__title"> Log In </mat-card-title>
+            <mat-card-subtitle>Please enter your login details</mat-card-subtitle>
+
+            <mat-card-content>
+                <p>
+                    <mat-form-field class="login-form__input" appearance="fill">
+                        <mat-label>Username</mat-label>
+                        <input matInput placeholder="Type in you data" formControlName="username" />
+                    </mat-form-field>
+                </p>
+                <p>
+                    <mat-form-field class="login-form__input" appearance="fill">
+                        <mat-label>Password</mat-label>
+                        <input type="text" matInput placeholder="Type in you data" formControlName="password" />
+                    </mat-form-field>
+                </p>
+                <p>
+                    <button class="login-form__button" mat-raised-button color="primary">Sign in</button>
+                </p>
+
+                <a class="login-form__registration-link" [routerLink]="['/auth/registration']"
+                    ><br />
+                    Sign up here!</a
+                >
+            </mat-card-content>
+        </mat-card>
+    </form>
+</div>

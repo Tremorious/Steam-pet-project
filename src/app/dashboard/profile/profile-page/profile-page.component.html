@@ -1,0 +1,41 @@
+<div class="profile">
+    <form
+        class="profile-form"
+        *ngIf="!!profileForm"
+        [formGroup]="profileForm"
+        (submit)="onUpdateProfileInfo()"
+    >
+        <mat-card class="profile-form__inner">
+            <mat-card-title class="profile-form__title"> Profile </mat-card-title>
+            <mat-card-subtitle></mat-card-subtitle>
+
+            <mat-card-content>
+                <p>
+                    <mat-form-field class="profile-form__input" appearance="fill">
+                        <mat-label>Username</mat-label>
+                        <input matInput placeholder="Type in you data" formControlName="username" />
+                        <!-- <mat-error *ngIf="profileForm.controls['username'].errors">username is requied</mat-error> -->
+                    </mat-form-field>
+                </p>
+                <p>
+                    <mat-form-field class="profile-form__input" appearance="fill">
+                        <mat-label>Email</mat-label>
+                        <input matInput placeholder="Type in you data" formControlName="email" />
+                        <mat-error>wrong data</mat-error>
+                    </mat-form-field>
+                </p>
+                <p>
+                    <mat-form-field class="profile-form__input" appearance="fill">
+                        <mat-label>Age</mat-label>
+                        <input matInput placeholder="Type in you data" formControlName="age" />
+                        <mat-error>wrong data</mat-error>
+                    </mat-form-field>
+                </p>
+
+                <p>
+                    <button class="profile-form__button" mat-raised-button color="primary">Submit</button>
+                </p>
+            </mat-card-content>
+        </mat-card>
+    </form>
+</div>

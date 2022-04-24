@@ -1,0 +1,43 @@
+<div class="friends">
+    <div class="container">
+        <h1 class="friends__title">Friends</h1>
+        <app-searchbar
+            class="friends__searchbar"
+            [searchbarLabel]="searchBarLabelName"
+            [searchbarPlaceholder]="searchbarPlaceholderName"
+            (filterName)="filterUsers($event)"
+        ></app-searchbar>
+
+        <div
+            class="animation-container"
+            *ngIf="filteredUsers.length > 0"
+            [@friendsDisplayAnimation]="filteredUsers.length"
+        >
+            <mat-card *ngFor="let user of filteredUsers" class="friends__user-card">
+                <mat-card-title class="friends__user-card__title">{{ user.username }}</mat-card-title>
+
+                <button
+                    *ngIf="!user.isFriend"
+                    class="friends__user-card__add-button"
+                    mat-raised-button
+                    color="primary"
+                    type="button"
+                    (click)="onAddFrined(user)"
+                >
+                    Add Friend
+                </button>
+
+                <button
+                    *ngIf="user.isFriend"
+                    class="friends__user-card__remove-button"
+                    mat-raised-button
+                    color="warn"
+                    type="button"
+                    (click)="onRemoveFrined(user)"
+                >
+                    Remove Friend
+                </button>
+            </mat-card>
+        </div>
+    </div>
+</div>

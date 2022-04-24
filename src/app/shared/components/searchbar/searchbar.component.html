@@ -1,0 +1,13 @@
+<form class="searchbar">
+    <label for="searchbar__input" class="searchbar__label">{{ searchbarLabel }}</label>
+
+    <div class="searchbar__inner">
+        <input
+            id="searchbar__input"
+            class="searchbar__input"
+            name="search"
+            [placeholder]="searchbarPlaceholder"
+            (keyup)="emitFilterValue($event)"
+        />
+    </div>
+</form>

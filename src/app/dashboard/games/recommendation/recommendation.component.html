@@ -1,0 +1,9 @@
+<div class="game-sale-slider">
+    <div class="game-sale-slider__header">
+        <span class="game-sale-slider__header__title">Personalized Recommendations</span>
+        <div class="game-sale-slider__header__arrow-container"></div>
+    </div>
+    <div class="game-sale-slider__card-container">
+        <app-card *ngFor="let game of gamesList" [gameDetails]="game"> </app-card>
+    </div>
+</div>
