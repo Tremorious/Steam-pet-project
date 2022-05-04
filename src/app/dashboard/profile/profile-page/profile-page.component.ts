@@ -1,17 +1,21 @@
-import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Component, HostBinding, OnDestroy, OnInit } from '@angular/core';
 import { FormBuilder, FormControl, FormGroup, Validators } from '@angular/forms';
-import { tap, map, Observable } from 'rxjs';
+import { Subscription, Observable } from 'rxjs';
 import { MatSnackBar } from '@angular/material/snack-bar';
 import { UserService } from 'src/app/core/services/user.service';
+import { UserCredentials } from 'src/app/core/models/UserCredentialsModel';
 
 @Component({
     selector: 'app-profile-page',
     templateUrl: './profile-page.component.html',
     styleUrls: ['./profile-page.component.scss']
 })
-export class ProfilePageComponent implements OnInit {
+export class ProfilePageComponent implements OnInit, OnDestroy {
+    @HostBinding('class')
+    hostClass = 'profile';
+
     profileForm: FormGroup = new FormGroup({});
-    userProfileInfo$: Observable<any> = new Observable();
+    userCredentials: Observable<UserCredentials>;
 
     constructor(private formBuilder: FormBuilder, private userService: UserService, private _snackBar: MatSnackBar) {}
 
@@ -26,15 +30,7 @@ export class ProfilePageComponent implements OnInit {
             age: new FormControl(``, [Validators.min(18), Validators.max(100)])
         });
 
-        this.userProfileInfo$ = this.userService.getUserCredentials();
-
-        this.userProfileInfo$.subscribe((data) => {
-            this.profileForm.setValue({
-                username: data.username,
-                email: data.email,
-                age: data.age
-            });
-        });
+        this.userCredentials = this.userService.getUserCredentials();
     }
 
     onUpdateProfileInfo() {
@@ -43,12 +39,16 @@ export class ProfilePageComponent implements OnInit {
         }
 
         this.userService.updateUserCredentrials(this.profileForm.value).subscribe(
-            (data) => {
-                this._snackBar.open('Updated successfuly');
+            () => {
+                this._snackBar.open('Updated successfully');
             },
             (err) => {
-                console.log('Something went wrong');
+                console.log(`${err}`);
             }
         );
+    }
+
+    ngOnDestroy(): void {
+        console.log('destr profile-page component')
     }
 }

@@ -1,11 +1,11 @@
-<div class="game-card"  (click)="navigateToGamePage(gameDetails.title) ">
+<div class="game-card" (click)="navigateToGamePage(gameDetails.title)">
     <div class="game-card__header">
         <img [src]="gameDetails.thumbnail" alt="" class="game-card__header__background" />
     </div>
     <div class="game-card__body">
         <div class="game-card__body__title">
             <div class="game-card__body__title-name">{{ gameDetails.title }}</div>
-            <div class="game-card__body__title-price">Free</div>
+            <app-button-free></app-button-free>
         </div>
     </div>
 </div>

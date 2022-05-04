@@ -9,16 +9,21 @@
     box-sizing: border-box;
 }
 
+h1,
+h2,
+h3,
+h4 {
+    margin: 0;
+}
+
 html,
 body {
+    height: 100%;
     color: $main-font;
     margin: 0;
     padding: 0;
-    height: 100%;
-    overflow-x: hidden;
-}
-body {
     font-family: 'Open Sans', sans-serif;
+    font-size: 20px;
 }
 a {
     color: inherit;
@@ -35,6 +40,19 @@ a {
     max-width: 1170px;
     margin: auto;
     padding-top: 50px;
+}
+
+.button-square {
+    display: block;
+    cursor: pointer;
+    min-height: 40px;
+    height: 100%;
+    color: #fff;
+    border: none;
+    width: 70px;
+    border-radius: 0;
+    font-size: 14px;
+    background-color: $main-blue;
 }
 
 .mat-slider-thumb {

@@ -9,9 +9,10 @@ import { RecommendationComponent } from './recommendation/recommendation.compone
 import { CardComponent } from './card/card.component';
 import { MaterialModule } from 'src/app/shared/material.module';
 import { RecentlyAddedComponent } from './recently-added/recently-added.component';
+import { SharedModule } from 'src/app/shared/shared.module';
 
 @NgModule({
     declarations: [GamesPageComponent, SliderComponent, RecommendationComponent, CardComponent, RecentlyAddedComponent],
-    imports: [CommonModule, GamesRoutingModule, MaterialModule]
+    imports: [CommonModule, GamesRoutingModule, MaterialModule, SharedModule]
 })
 export class GamesModule {}

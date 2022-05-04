@@ -5,10 +5,11 @@ import { FooterComponent } from './layout/footer/footer.component';
 import { RouterModule } from '@angular/router';
 import { MaterialModule } from './material.module';
 import { SearchbarComponent } from './components/searchbar/searchbar.component';
+import { ButtonFreeComponent } from './components/button-free/button-free.component';
 
 @NgModule({
-    declarations: [HeaderComponent, FooterComponent, SearchbarComponent],
+    declarations: [HeaderComponent, FooterComponent, SearchbarComponent, ButtonFreeComponent],
     imports: [CommonModule, RouterModule, MaterialModule],
-    exports: [HeaderComponent, FooterComponent, SearchbarComponent]
+    exports: [HeaderComponent, FooterComponent, SearchbarComponent, ButtonFreeComponent]
 })
 export class SharedModule {}

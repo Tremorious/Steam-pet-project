@@ -12,10 +12,11 @@ export class RecommendationComponent implements OnInit {
     gamesList: GameAPI[] = [];
     amountOfDisplayedCards = 3;
 
+    
+
     constructor(private gamesService: GamesService) {}
 
     ngOnInit(): void {
-        console.log(123);
         this.gamesService
             .getAllAPIGames()
             .pipe(
@@ -35,4 +36,6 @@ export class RecommendationComponent implements OnInit {
         }
         return newArr;
     }
+
+    
 }

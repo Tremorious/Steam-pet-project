@@ -1,0 +1,13 @@
+@use 'src/variables' as *;
+
+button {
+    text-transform: uppercase;
+    font-size: 12px;
+    font-weight: 700;
+    padding: 10px;
+    border-radius: 5px;
+    outline: none;
+    border: none;
+    color: #fff;
+    background-color: $main-blue;
+}

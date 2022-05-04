@@ -1,21 +1,36 @@
 @use 'src/variables' as *;
 
+:host {
+    height: 100%;
+    display: block;
+    margin: 50px 0;
+    padding: 0 20%;
+}
 .profile {
-    display: flex;
-    justify-content: center;
-    align-items: center;
     &-form {
-        text-align: center;
-        -webkit-box-shadow: 0px 0px 9px 2px rgba(0, 0, 0, 0.3);
-        box-shadow: 0px 0px 9px 2px rgba(0, 0, 0, 0.3);
-        &__title {
-            margin-bottom: 20px;
+        display: flex;
+        flex-direction: column;
+        &__form-group {
+            margin-bottom: 30px;
+            &__title {
+                margin: 0;
+            }
+            &__input {
+                width: 100%;
+                padding: 30px;
+                color: inherit;
+                font-size: 1rem;
+                background-color: $input-bg-color;
+                height: 50px;
+                outline: none;
+                border: none;
+                border-radius: 5px;
+            }
         }
-        &__inner {
-            padding: 50px 100px;
-        }
-        &__button {
-            width: 100%;
+        &__submit-button {
+            font-size: 1rem;
+            width: 30%;
+            align-self: center;
         }
     }
 }
