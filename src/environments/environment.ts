@@ -5,7 +5,8 @@
 export const environment = {
     production: false,
     baseURL: 'http://localhost:5050',
-    
+    hostKey: 'free-to-play-games-database.p.rapidapi.com',
+    apiKey: '6cf592a20cmsh90931b191c2d95ap19b886jsnd993b111fa48'
 };
 
 /*

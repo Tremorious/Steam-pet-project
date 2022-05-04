@@ -1,41 +1,39 @@
-<div class="profile">
-    <form
-        class="profile-form"
-        *ngIf="!!profileForm"
-        [formGroup]="profileForm"
-        (submit)="onUpdateProfileInfo()"
-    >
-        <mat-card class="profile-form__inner">
-            <mat-card-title class="profile-form__title"> Profile </mat-card-title>
-            <mat-card-subtitle></mat-card-subtitle>
+<form
+    class="profile-form"
+    *ngIf="userCredentials | async as data"
+    [formGroup]="profileForm"
+    (submit)="onUpdateProfileInfo()"
+>
+    <div class="profile-form__form-group">
+        <h1 class="profile-form__form-group__title">
+            Display name: <strong>{{ data.username }}</strong>
+        </h1>
+        <input
+            id="input__username-update"
+            class="profile-form__form-group__input"
+            placeholder="Type in your new username"
+            formControlName="username"
+        />
+        <label for="input__username-update"
+            >This name is your public identity. Please note this change your username.</label
+        >
+    </div>
 
-            <mat-card-content>
-                <p>
-                    <mat-form-field class="profile-form__input" appearance="fill">
-                        <mat-label>Username</mat-label>
-                        <input matInput placeholder="Type in you data" formControlName="username" />
-                        <!-- <mat-error *ngIf="profileForm.controls['username'].errors">username is requied</mat-error> -->
-                    </mat-form-field>
-                </p>
-                <p>
-                    <mat-form-field class="profile-form__input" appearance="fill">
-                        <mat-label>Email</mat-label>
-                        <input matInput placeholder="Type in you data" formControlName="email" />
-                        <mat-error>wrong data</mat-error>
-                    </mat-form-field>
-                </p>
-                <p>
-                    <mat-form-field class="profile-form__input" appearance="fill">
-                        <mat-label>Age</mat-label>
-                        <input matInput placeholder="Type in you data" formControlName="age" />
-                        <mat-error>wrong data</mat-error>
-                    </mat-form-field>
-                </p>
+    <div class="profile-form__form-group">
+        <h1 class="profile-form__form-group__title">Email</h1>
+        <label for="input__username-update">
+            Current email: <strong>{{ data.email }}</strong></label
+        >
+        <input class="profile-form__form-group__input" placeholder="Type in your new @email" formControlName="email" />
+    </div>
 
-                <p>
-                    <button class="profile-form__button" mat-raised-button color="primary">Submit</button>
-                </p>
-            </mat-card-content>
-        </mat-card>
-    </form>
-</div>
+    <div class="profile-form__form-group">
+        <h1 class="profile-form__form-group__title">Age</h1>
+        <label for="input__username-update">
+            Current age: <strong>{{ data.age }}</strong></label
+        >
+        <input class="profile-form__form-group__input" placeholder="Type in you data" formControlName="age" />
+    </div>
+
+    <button class="profile-form__submit-button button-square" color="primary">Submit</button>
+</form>

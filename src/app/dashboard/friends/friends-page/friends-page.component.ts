@@ -1,6 +1,6 @@
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-import { Component, OnInit } from '@angular/core';
+import { Component, HostBinding, OnInit } from '@angular/core';
 import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
 import { Friend } from 'src/app/core/models/FriendModel';
 import { UserService } from 'src/app/core/services/user.service';
@@ -19,6 +19,9 @@ import { UserService } from 'src/app/core/services/user.service';
     ]
 })
 export class FriendsPageComponent implements OnInit {
+    @HostBinding('class')
+    hostClass = 'friends';
+
     searchbarPlaceholderName = 'Search Friends';
     searchBarLabelName = 'Search Friends';
 

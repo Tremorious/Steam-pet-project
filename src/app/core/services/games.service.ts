@@ -9,27 +9,26 @@ import { Game, GameAPI } from '../models/GameModel';
     providedIn: 'root'
 })
 export class GamesService {
-    public baseURL: string = environment.baseURL;
     private id: string | null;
 
     constructor(private http: HttpClient) {
         this.id = localStorage.getItem('id');
     }
 
-    public getAllGames(): Observable<Game[]> {              
-        return this.http.get<Game[]>(this.baseURL + '/games');
+    public getAllGames(): Observable<Game[]> {
+        return this.http.get<Game[]>(environment.baseURL + '/games');
     }
 
     public getAllUserGames(): Observable<Game[]> {
-        return this.http.get<Game[]>(this.baseURL + '/games/' + this.id);
+        return this.http.get<Game[]>(environment.baseURL + '/games/' + this.id);
     }
 
     public addGame(gameId: string) {
-        return this.http.patch(this.baseURL + '/games/add/' + this.id, { gameId });
+        return this.http.patch(environment.baseURL + '/games/add/' + this.id, { gameId });
     }
 
     public removeGame(gameId: string) {
-        return this.http.patch(this.baseURL + '/games/remove/' + this.id, { gameId });
+        return this.http.patch(environment.baseURL + '/games/remove/' + this.id, { gameId });
     }
 
     public getAllAPIGames(): Observable<GameAPI[]> {

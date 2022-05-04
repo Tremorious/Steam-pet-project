@@ -1,15 +1,23 @@
 <div class="recently-added-block">
-    <div *ngFor="let game of games" class="card">
-      <div class="card-body">
-        <div class="card-body__image">
-          <img alt="" src="https://www.freetogame.com/g/518/thumbnail.jpg"/>
+    <div class="card" *ngFor="let game of games">
+        <div class="card-body">
+            <div class="card-body__image">
+                <img alt="" src="https://www.freetogame.com/g/518/thumbnail.jpg" />
+            </div>
+            <div class="card-body__content">
+                <span class="card-body__content__title">Test title</span>
+                <span class="card-body__content__description">{{
+                    'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Molestiae, suscipit?' | slice: 0:40
+                }}</span>
+                <span class="card-body__content__tag-container">
+                    <span>123</span>
+                    <span>abc</span>
+                </span>
+            </div>
+            <div class="card-body__specifics-block">
+                <div class="card-body__platform-tag"><i class="fa fa-windows" aria-hidden="true"></i></div>
+                <app-button-free></app-button-free>
+            </div>
         </div>
-        <div class="card-body__content">
-          <span class="card-body__title">Test title</span>
-        </div>
-        <div class="card-body__platform-tag"></div>
-        <div class="card-body__price"></div>
-      </div>
     </div>
-  </div>
-  
+</div>

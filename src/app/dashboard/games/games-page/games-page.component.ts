@@ -1,15 +1,15 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, HostBinding, OnInit } from '@angular/core';
 
 @Component({
-  selector: 'app-games-page',
-  templateUrl: './games-page.component.html',
-  styleUrls: ['./games-page.component.scss']
+    selector: 'app-games-page',
+    templateUrl: './games-page.component.html',
+    styleUrls: ['./games-page.component.scss']
 })
 export class GamesPageComponent implements OnInit {
+    constructor() {}
 
-  constructor() { }
+    @HostBinding('class')
+    hostClass = 'games-page';
 
-  ngOnInit(): void {
-  }
-
+    ngOnInit(): void {}
 }

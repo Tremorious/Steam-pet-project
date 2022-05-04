@@ -1,3 +1,4 @@
+import { SharedModule } from './../shared/shared.module';
 import { NgModule } from '@angular/core';
 import { CommonModule } from '@angular/common';
 
@@ -10,6 +11,13 @@ import { ProfileModule } from './profile/profile.module';
 
 @NgModule({
     declarations: [],
-    imports: [CommonModule, DashboardRoutingModule, GamesModule, LibraryModule, FriendsModule, ProfileModule]
+    imports: [
+        CommonModule,
+        DashboardRoutingModule,
+        GamesModule,
+        LibraryModule,
+        FriendsModule,
+        ProfileModule,
+    ]
 })
 export class DashboardModule {}

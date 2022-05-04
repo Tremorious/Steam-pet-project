@@ -1,13 +1,13 @@
-import { map } from 'rxjs';
+import { map, Observable } from 'rxjs';
 import { Injectable } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { environment } from 'src/environments/environment';
+import { UserCredentials } from '../models/UserCredentialsModel';
 
 @Injectable({
     providedIn: 'root'
 })
 export class UserService {
-    public baseURL: string = environment.baseURL;
     private userLogin: string | null;
     private id: string | null;
 
@@ -16,16 +16,16 @@ export class UserService {
         this.id = localStorage.getItem('id');
     }
 
-    public getUserCredentials() {
-        return this.http.get(this.baseURL + '/user/profile/' + this.id);
+    public getUserCredentials(): Observable<UserCredentials> {
+        return this.http.get<UserCredentials>(environment.baseURL + '/user/profile/' + this.id);
     }
 
     public updateUserCredentrials(userObj: object) {
-        return this.http.patch(this.baseURL + '/user/profile/' + this.id, userObj);
+        return this.http.patch(environment.baseURL + '/user/profile/' + this.id, userObj);
     }
 
     public getAllUsers() {
-        return this.http.get(this.baseURL + '/user/friends/' + this.id).pipe(
+        return this.http.get(environment.baseURL + '/user/friends/' + this.id).pipe(
             map((responce: any) => {
                 let { users } = responce;
                 return users;
@@ -34,10 +34,10 @@ export class UserService {
     }
 
     public addFriend(username: string) {
-        return this.http.patch(this.baseURL + '/user/friends/add/' + this.id, { username });
+        return this.http.patch(environment.baseURL + '/user/friends/add/' + this.id, { username });
     }
 
     public removeFriend(username: string) {
-        return this.http.patch(this.baseURL + '/user/friends/remove/' + this.id, { username });
+        return this.http.patch(environment.baseURL + '/user/friends/remove/' + this.id, { username });
     }
 }
