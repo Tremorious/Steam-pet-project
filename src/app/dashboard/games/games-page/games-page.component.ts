@@ -9,7 +9,7 @@ export class GamesPageComponent implements OnInit {
     constructor() {}
 
     @HostBinding('class')
-    hostClass = 'games-page';
+    hostClass = 'container';
 
     ngOnInit(): void {}
 }

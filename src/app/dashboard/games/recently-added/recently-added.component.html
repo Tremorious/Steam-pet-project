@@ -1,17 +1,29 @@
 <div class="recently-added-block">
-    <div class="card" *ngFor="let game of games">
+    <div class="recently-added-block__header">
+        <h1 class="recently-added-block__header__title">Recently Added</h1>
+        <select class="recently-added-block__header__select" (change)="onGenreChange($event)">
+            <option class="recently-added-block__header__select-option" value="">Select genre</option>
+            <option
+                class="recently-added-block__header__select-option"
+                [value]="genre"
+                *ngFor="let genre of genres$ | async"
+            >
+                {{ genre }}
+            </option>
+        </select>
+        <div class="recently-added-block__header__select-arrow"></div>
+    </div>
+
+    <div class="card" *ngFor="let game of filteredGames$ | async | slice: 0:10">
         <div class="card-body">
             <div class="card-body__image">
-                <img alt="" src="https://www.freetogame.com/g/518/thumbnail.jpg" />
+                <img alt="" [src]="game.thumbnail" />
             </div>
             <div class="card-body__content">
-                <span class="card-body__content__title">Test title</span>
-                <span class="card-body__content__description">{{
-                    'Lorem ipsum, dolor sit amet consectetur adipisicing elit. Molestiae, suscipit?' | slice: 0:40
-                }}</span>
+                <span class="card-body__content__title">{{ game.title }}</span>
+                <span class="card-body__content__description">{{ game.short_description }}</span>
                 <span class="card-body__content__tag-container">
-                    <span>123</span>
-                    <span>abc</span>
+                    <span>{{ game.genre }}</span>
                 </span>
             </div>
             <div class="card-body__specifics-block">
