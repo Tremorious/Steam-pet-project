@@ -1,9 +1,11 @@
 import { MatSnackBar } from '@angular/material/snack-bar';
 
-import { Component, HostBinding, OnInit } from '@angular/core';
+import { Component, HostBinding, OnDestroy, OnInit } from '@angular/core';
 import { animate, query, stagger, style, transition, trigger } from '@angular/animations';
 import { Friend } from 'src/app/core/models/FriendModel';
 import { UserService } from 'src/app/core/services/user.service';
+import { LoaderService } from 'src/app/core/services/loader.service';
+import { Observable, BehaviorSubject, concat, combineLatest, map, first, tap, take, Subscription } from 'rxjs';
 
 @Component({
     selector: 'app-friends',
@@ -18,57 +20,65 @@ import { UserService } from 'src/app/core/services/user.service';
         ])
     ]
 })
-export class FriendsPageComponent implements OnInit {
+export class FriendsPageComponent implements OnInit, OnDestroy {
     @HostBinding('class')
     hostClass = 'friends';
+    private sub: Subscription;
 
-    searchbarPlaceholderName = 'Search Friends';
-    searchBarLabelName = 'Search Friends';
+    showLoader$ = this.loaderService.loadingState$;
 
-    userList: Friend[] = [];
-    filteredUsers: Friend[] = [];
+    _filterField$ = new BehaviorSubject<string>('');
+    filterField$ = this._filterField$.asObservable();
 
-    constructor(private userService: UserService, private _snackBar: MatSnackBar) {}
+    usersList$: Observable<Friend[]>;
+
+    constructor(
+        private userService: UserService,
+        private _snackBar: MatSnackBar,
+        private loaderService: LoaderService
+    ) {
+        this.loaderService.showLoader();
+    }
 
     ngOnInit(): void {
-        this.getAllUsers();
-    }
-
-    private getAllUsers(): void {
-        this.userService.getAllUsers().subscribe((data) => {
-            this.userList = data;
-            this.filteredUsers = this.userList;
-        });
-    }
-    public filterUsers(filterField: string) {
-        this.filteredUsers = this.userList.filter((item: Friend) => {
-            return item.username.indexOf(filterField) !== -1;
-        });
-    }
-
-    public onAddFrined(user: Friend) {
-        this.userService.addFriend(user.username).subscribe(
-            (data) => {
-                this._snackBar.open('Added in your friendlist');
-            },
-            (err) => {
-                this._snackBar.open(err.error.message);
-            }
+        this.usersList$ = combineLatest([this.userService.users$, this.filterField$]).pipe(
+            tap((data) => {
+                this.loaderService.hideLoader();
+            }),
+            map(([users, filterField]) => {
+                return users.filter((item: Friend) => {
+                    return filterField ? item.username.indexOf(filterField) !== -1 : true;
+                });
+            })
         );
-        let index = this.filteredUsers.findIndex((friend) => friend.username === user.username);
-        this.filteredUsers[index].isFriend = !this.filteredUsers[index].isFriend;
     }
 
-    public onRemoveFrined(user: Friend) {
-        this.userService.removeFriend(user.username).subscribe(
-            (data) => {
-                this._snackBar.open('Removed from your friendlist');
-            },
-            (err) => {
-                this._snackBar.open(err.error.message);
-            }
-        );
-        let index = this.filteredUsers.findIndex((friend) => friend.username === user.username);
-        this.filteredUsers[index].isFriend = !this.filteredUsers[index].isFriend;
+    onToggleFriendship(user: Friend) {
+        this.loaderService.showLoader();
+        const action$ = user.isFriend
+            ? this.userService.removeFriend(user.username)
+            : this.userService.addFriend(user.username);
+
+        this.sub = action$
+            .pipe(
+                tap((data) => {
+                    this.loaderService.hideLoader();
+                }),
+                take(1),
+                map((res) => {
+                    return res['message'];
+                })
+            )
+            .subscribe((data) => {
+                this._snackBar.open(data);
+            });
+    }
+
+    setFilterField(value: string) {
+        this._filterField$.next(value);
+    }
+
+    ngOnDestroy() {
+        this.sub && this.sub.unsubscribe();
     }
 }

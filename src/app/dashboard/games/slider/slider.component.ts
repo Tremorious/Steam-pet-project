@@ -1,6 +1,6 @@
 import { trigger, state, style, transition, animate } from '@angular/animations';
-import { Component, Input, OnInit } from '@angular/core';
-import { Observable } from 'rxjs';
+import { Component, Input, OnDestroy, OnInit } from '@angular/core';
+import { Observable, Subscription } from 'rxjs';
 import { Game } from 'src/app/core/models/GameModel';
 import { GamesService } from 'src/app/core/services/games.service';
 
@@ -16,26 +16,28 @@ import { GamesService } from 'src/app/core/services/games.service';
         ])
     ]
 })
-export class SliderComponent implements OnInit {
-    selectedIndex = 0;
+export class SliderComponent implements OnInit, OnDestroy {
+    public selectedIndex = 0;
     private slideAnimationDuration: number = 7000;
 
     public gamesList: Game[] = [];
-    private gameList$: Observable<Game[]> | undefined;
+    private gamesListSubscription$: Subscription;
 
     constructor(private gamesService: GamesService) {}
+
+    private arrSort<T extends Game[]>(arr: T): T {
+        return arr.sort(() => Math.random() - 0.5);
+    }
 
     ngOnInit(): void {
         this.autoSlide();
 
-        this.gameList$ = this.gamesService.getAllGames();
-
-        this.gameList$.subscribe((data) => {
-            this.gamesList = data;
+        this.gamesListSubscription$ = this.gamesService.games$.subscribe((data) => {
+            this.gamesList = this.arrSort(data);
         });
     }
 
-    autoSlide() {
+    private autoSlide() {
         setInterval(() => {
             if (this.selectedIndex === this.gamesList.length - 1) {
                 this.selectedIndex = 0;
@@ -45,7 +47,11 @@ export class SliderComponent implements OnInit {
         }, this.slideAnimationDuration);
     }
 
-    selectImage(index: number): void {
+    public selectImage(index: number): void {
         this.selectedIndex = index;
+    }
+
+    ngOnDestroy() {
+        this.gamesListSubscription$ && this.gamesListSubscription$.unsubscribe();
     }
 }

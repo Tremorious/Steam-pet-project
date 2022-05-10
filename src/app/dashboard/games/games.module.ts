@@ -10,9 +10,19 @@ import { CardComponent } from './card/card.component';
 import { MaterialModule } from 'src/app/shared/material.module';
 import { RecentlyAddedComponent } from './recently-added/recently-added.component';
 import { SharedModule } from 'src/app/shared/shared.module';
+import { SpecificGamePageComponent } from './specific-game-page/specific-game-page.component';
+import { SpecificGameResolverService } from 'src/app/core/services/resolvers/specific-game-resolver.service';
 
 @NgModule({
-    declarations: [GamesPageComponent, SliderComponent, RecommendationComponent, CardComponent, RecentlyAddedComponent],
-    imports: [CommonModule, GamesRoutingModule, MaterialModule, SharedModule]
+    declarations: [
+        GamesPageComponent,
+        SliderComponent,
+        RecommendationComponent,
+        CardComponent,
+        RecentlyAddedComponent,
+        SpecificGamePageComponent
+    ],
+    imports: [CommonModule, GamesRoutingModule, MaterialModule, SharedModule],
+    providers: [SpecificGameResolverService]
 })
 export class GamesModule {}

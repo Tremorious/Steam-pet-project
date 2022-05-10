@@ -1,7 +1,7 @@
 import { NotFoundPageComponent } from './not-found-page/not-found-page.component';
 import { NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AuthGuard } from './core/services/auth-guard.guard';
+import { AuthGuard } from './core/services/guards/auth-guard.guard';
 
 const routes: Routes = [
     { path: '', pathMatch: 'full', redirectTo: 'dashboard' },

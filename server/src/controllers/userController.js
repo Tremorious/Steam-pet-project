@@ -49,7 +49,7 @@ const getAllUsers = async (req, res) => {
             })
             .filter((user) => user.username !== foundUser.username);
 
-        res.status(200).json({ users });
+        res.status(200).json(users);
     } catch (err) {
         console.log(err);
         res.status(400).json({ message: 'Something went wrong' });
@@ -70,7 +70,7 @@ const addFriend = async (req, res) => {
         if (isForbiddenToAdd) {
             throw new Error(`"${username}" is allready your in your friendlist`);
         }
-        
+
         foundUser.friends.push({ username, id });
 
         await foundUser.save();

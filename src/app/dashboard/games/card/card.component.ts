@@ -16,7 +16,9 @@ export class CardComponent implements OnInit {
 
     constructor(private gamesService: GamesService, private _snackBar: MatSnackBar, private route: Router) {}
 
-    ngOnInit(): void {}
+    ngOnInit(): void {
+        return
+    }
 
     public navigateToGamePage(name: string) {
         const path = name.toLocaleLowerCase().replace(/ /g, '-');

@@ -1,7 +1,47 @@
 <section class="library">
     <div class="container-large">
         <h1 class="library__title">My Games</h1>
-        <div class="library__games-container" *ngIf="displayedGames.length > 0"></div>
-        <span class="library__games" *ngIf="displayedGames.length === 0">You have no games in your library</span>
+        <div class="library__games-container" *ngIf="(displayedGames$ | async)?.length; else no_games"></div>
+        <ng-template class="library__games" #no_games>You have no games in your library</ng-template>
     </div>
+
+    <form class="library__add-game-form" [formGroup]="addGameForm" (submit)="onCreateNewGame()">
+        <h1>Add new game to slider!</h1>
+        <div class="library__add-game-form__form-group">
+            <label class="library__add-game-form__form-group__title">Name</label>
+            <input class="library__add-game-form__form-group__input" type="text" formControlName="name" />
+        </div>
+        <div class="library__add-game-form__form-group">
+            <label class="profile-form__form-group__title">Tag</label>
+            <input class="library__add-game-form__form-group__input" type="text" formControlName="tag" />
+        </div>
+        <div class="library__add-game-form__form-group">
+            <label class="library__add-game-form__form-group__title">Price</label>
+            <input class="library__add-game-form__form-group__input" type="number" formControlName="price" />
+        </div>
+        <div class="library__add-game-form__form-group">
+            <label class="library__add-game-form__form-group__title">Description</label>
+            <input class="library__add-game-form__form-group__input" type="text" formControlName="description" />
+        </div>
+        <div class="library__add-game-form__form-group">
+            <label class="library__add-game-form__form-group__title">Image</label>
+            <input class="library__add-game-form__form-group__input" type="url" formControlName="image" />
+        </div>
+        <div class="library__add-game-form__form-group">
+            <label class="library__add-game-form__form-group__title">Image Small</label>
+            <input class="library__add-game-form__form-group__input" type="url" formControlName="image_small" />
+        </div>
+        <div class="library__add-game-form__form-group">
+            <label class="library__add-game-form__form-group__title">Image Logo</label>
+            <input class="library__add-game-form__form-group__input" type="url" formControlName="image_logo" />
+        </div>
+        <button
+            mat-raised-button
+            color="primary"
+            [disabled]="addGameForm.invalid"
+            class="library__add-game-form__submit-button"
+        >
+            Submit
+        </button>
+    </form>
 </section>

@@ -1,7 +1,11 @@
-<app-header class="header"></app-header>
+<div *ngIf="showLoader$ | async as showLoader">
+    <app-loader *ngIf="showLoader"></app-loader>
+</div>
+
+<app-header *appAuth class="header"></app-header>
 
 <div class="main">
     <router-outlet></router-outlet>
 </div>
 
-<app-footer class="footer"></app-footer>
+<app-footer *appAuth class="footer"></app-footer>

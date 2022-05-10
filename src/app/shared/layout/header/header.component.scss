@@ -68,8 +68,11 @@
             }
         }
     }
-    &__logout-button  {
+    &__logout-button {
+        margin: 7px;
         justify-content: flex-end;
-        
+        background-color: transparent;
+        color: $main-blue;
+        border: 2px solid $main-blue;
     }
 }

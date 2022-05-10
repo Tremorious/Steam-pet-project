@@ -5,7 +5,7 @@ export interface GameDetails {
     game_url: string;
     genre: string;
     id: number;
-    minimum_system_requirements: MinimunSystemDetail;
+    minimum_system_requirements: MinimumSystemDetail;
     platform: string;
     publisher: string;
     release_date: string;
@@ -16,7 +16,7 @@ export interface GameDetails {
     title: string;
 }
 
-interface MinimunSystemDetail {
+interface MinimumSystemDetail {
     graphics: string;
     memory: string;
     os: string;

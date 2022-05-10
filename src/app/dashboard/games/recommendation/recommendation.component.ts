@@ -1,4 +1,5 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnDestroy, OnInit } from '@angular/core';
+import { Subscription } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { GameAPI } from 'src/app/core/models/GameModel';
 import { GamesService } from 'src/app/core/services/games.service';
@@ -8,17 +9,15 @@ import { GamesService } from 'src/app/core/services/games.service';
     templateUrl: './recommendation.component.html',
     styleUrls: ['./recommendation.component.scss']
 })
-export class RecommendationComponent implements OnInit {
+export class RecommendationComponent implements OnInit, OnDestroy {
     gamesList: GameAPI[] = [];
     amountOfDisplayedCards = 3;
-
-    
+    sub: Subscription;
 
     constructor(private gamesService: GamesService) {}
 
     ngOnInit(): void {
-        this.gamesService
-            .getAllAPIGames()
+        this.sub = this.gamesService.allAPIGames$
             .pipe(
                 map((res: GameAPI[]) => {
                     return this.getRandomItemsFromArray(res, this.amountOfDisplayedCards);
@@ -37,5 +36,7 @@ export class RecommendationComponent implements OnInit {
         return newArr;
     }
 
-    
+    ngOnDestroy() {
+        this.sub && this.sub.unsubscribe();
+    }
 }

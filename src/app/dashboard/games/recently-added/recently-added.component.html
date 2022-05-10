@@ -1,24 +1,25 @@
-<div class="recently-added-block">
+<div class="recently-added-block" *ngIf="vm$ | async as vm">
     <div class="recently-added-block__header">
         <h1 class="recently-added-block__header__title">Recently Added</h1>
         <select class="recently-added-block__header__select" (change)="onGenreChange($event)">
             <option class="recently-added-block__header__select-option" value="">Select genre</option>
-            <option
-                class="recently-added-block__header__select-option"
-                [value]="genre"
-                *ngFor="let genre of genres$ | async"
-            >
+            <option class="recently-added-block__header__select-option" [value]="genre" *ngFor="let genre of vm.genres">
                 {{ genre }}
             </option>
         </select>
         <div class="recently-added-block__header__select-arrow"></div>
     </div>
 
-    <div class="card" *ngFor="let game of filteredGames$ | async | slice: 0:10">
+    <div
+        class="card"
+        *ngFor="let game of vm.games | slice: 0:10"
+        (click)="navigateToGamePage(game.title, game.id)"
+    >
         <div class="card-body">
             <div class="card-body__image">
                 <img alt="" [src]="game.thumbnail" />
             </div>
+
             <div class="card-body__content">
                 <span class="card-body__content__title">{{ game.title }}</span>
                 <span class="card-body__content__description">{{ game.short_description }}</span>
@@ -26,6 +27,7 @@
                     <span>{{ game.genre }}</span>
                 </span>
             </div>
+
             <div class="card-body__specifics-block">
                 <div class="card-body__platform-tag"><i class="fa fa-windows" aria-hidden="true"></i></div>
                 <app-button-free></app-button-free>
